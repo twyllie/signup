@@ -1,0 +1,9 @@
+.error {
+    color: #f00;
+}
+#form {
+    max-height: auto;
+    max-width: 40%;
+    margin: 0 auto;
+    background-color: #efefef
+}
