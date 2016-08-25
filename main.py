@@ -125,7 +125,7 @@ class SignupHandler(webapp2.RequestHandler):
         elif not valid_username(username):
             uError = "This is not a valid username"
         # Password is empty
-        if not password:
+        if len(password) < 2:
             pError = "This is not a valid password"
         # Password is invalid
         elif not valid_password:
@@ -134,8 +134,9 @@ class SignupHandler(webapp2.RequestHandler):
         if password != verify:
             vError = "The passwords do not match"
         # Email is invalid
-        if not valid_email(email):
-            eError = "This is not a valid email"
+        if email:
+            if not valid_email(email):
+                eError = "This is not a valid email"
 
         # Redirects the user if there are no errors.
         if not uError and not pError and not vError and not eError:
