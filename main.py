@@ -107,10 +107,10 @@ class SignupHandler(webapp2.RequestHandler):
         self.response.write(response)
 
     def post(self):
-        username = cgi.escape(self.request.get("username"))
+        username = cgi.escape(self.request.get("username"), quote=True)
         password = self.request.get("password")
         verify = self.request.get("verify")
-        email = cgi.escape(self.request.get("email"))
+        email = cgi.escape(self.request.get("email"), quote=True)
 
         # Zeroing variables, in case no errors trip.
         uError = ""
@@ -140,6 +140,7 @@ class SignupHandler(webapp2.RequestHandler):
         # Redirects the user if there are no errors.
         if not uError and not pError and not vError and not eError:
             self.redirect("/welcome?username={}".format(username))
+            return
 
         form = """
         <div id="form">
